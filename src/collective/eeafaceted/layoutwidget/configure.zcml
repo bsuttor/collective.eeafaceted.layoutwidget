@@ -3,9 +3,13 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:faceted="http://namespaces.zope.org/faceted"
     i18n_domain="collective.eeafaceted.layoutwidget">
 
   <i18n:registerTranslations directory="locales" />
+
+  <include package="eea.facetednavigation" />
 
   <genericsetup:registerProfile
       name="default"
@@ -28,6 +32,38 @@
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="collective.eeafaceted.layoutwidget-hiddenprofiles"
+      />
+
+  <utility
+      name="collective.eeafaceted.layoutwidget.Layouts"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".vocabulary.FacetedLayoutVocabulary"
+      />
+
+  <!-- layout widget -->
+  <faceted:widget
+      factory=".layout.Widget"
+      schema=".layout.ILayoutSchema"
+      />
+
+  <browser:resource
+      name="collective.eeafaceted.layoutwidget.view.js"
+      file="./resources/layout-view.js"
+      />
+
+  <browser:resource
+      name="collective.eeafaceted.layoutwidget.edit.js"
+      file="./resources/layout-edit.js"
+      />
+
+  <browser:resource
+      name="collective.eeafaceted.layoutwidget.view.css"
+      file="./resources/layout-view.css"
+      />
+
+  <browser:resource
+      name="collective.eeafaceted.layoutwidget.edit.css"
+      file="./resources/layout-edit.css"
       />
 
 </configure>
