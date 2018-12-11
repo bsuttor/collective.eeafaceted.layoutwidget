@@ -42,9 +42,12 @@ class CriteriaHandler(Criteria):
 
     def _adapted_widget(self, widget):
         def hidden(self):
+            widget_name = self.data.widget
+            if not widget_name:
+                return self.data.hidden
             utility = queryUtility(
                 IAdaptedWidget,
-                name=self.data.widget,
+                name=widget_name,
             )
             if utility:
                 return utility.hidden(self, self.data)
